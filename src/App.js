@@ -97,7 +97,73 @@ export default function MoonshotGame() {
   return (
     <div style={{ padding: '2rem', fontFamily: 'Arial, sans-serif', background: 'url("https://www.transparenttextures.com/patterns/stardust.png") #0b0c2a', color: '#e0e0ff', minHeight: '100vh', textAlign: 'center' }}>
       <h1 style={{ color: '#00ffe7', textShadow: '0 0 5px #00ffe7' }}>🚀 Moonshot Game</h1>
-      {/* The rest of your screen rendering logic follows here... */}
+
+      {screen === 1 && (
+        <div>
+          <h2 style={{ marginBottom: '1rem' }}>Select a Problem</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '1rem', justifyItems: 'center' }}>
+            {problems.map((p, idx) => (
+              <button key={idx} onClick={() => setProblem(p)} style={{
+                width: '100%', maxWidth: '250px', padding: '1rem', border: '1px solid #7df9ff', borderRadius: '12px',
+                backgroundColor: problem === p ? '#7df9ff' : '#1a1a40', color: problem === p ? '#000' : '#7df9ff',
+                textAlign: 'left', boxShadow: problem === p ? '0 0 10px #7df9ff' : 'none', cursor: 'pointer', transition: 'all 0.2s ease-in-out', transform: problem === p ? 'scale(1.05)' : 'scale(1)'
+              }}>
+                <div style={{ fontSize: '2rem' }}>{p.icon}</div>
+                <strong>{p.title}</strong>
+                <div style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>{p.description}</div>
+              </button>
+            ))}
+          </div>
+          <div style={{ marginTop: '2rem' }}>
+            <button disabled={!problem} onClick={() => setScreen(2)} style={{ marginRight: '1rem', padding: '0.5rem 1rem', backgroundColor: '#00ffe7', color: '#000', border: 'none' }}>Next</button>
+          </div>
+        </div>
+      )}
+      
+          {screen === 2 && (
+        <div>
+          <h2 style={{ marginBottom: '1rem' }}>Choose a Time Limit</h2>
+          {problem && renderCard(problem)}
+          {[10, 20, 30].map(min => (
+            <button key={min} onClick={() => { setTimeLimit(min); setScreen(3); }} style={{ margin: '1rem', padding: '1rem', backgroundColor: '#1a1a40', color: '#7df9ff', border: '1px solid #555' }}>{min} minutes</button>
+          ))}
+          <div style={{ marginTop: '1rem' }}>
+            <button onClick={() => setScreen(1)} style={{ padding: '0.5rem 1rem', color: '#ccc', background: 'transparent', border: '1px solid #444' }}>Back</button>
+          </div>
+        </div>
+      )}
+
+          {screen === 3 && (
+        <div>
+          <h2 style={{ marginBottom: '1rem' }}>Select a Technology/Policy</h2>
+          {problem && renderCard(problem)}
+          <div style={{ marginBottom: '1rem' }}>
+            {timeLimit && <div style={{ border: '1px dashed #7df9ff', padding: '1rem', borderRadius: '12px', backgroundColor: '#1a1a40', maxWidth: '300px', margin: '1rem auto' }}>⏱️ You selected <strong>{timeLimit} minutes</strong></div>}
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center' }}>
+            {techPolicyOptions.length === 0 && drawNewOptions()}
+            {techPolicyOptions.map((item, idx) => (
+              <button key={idx} onClick={() => setSelectedTechPolicy(item)} style={{
+                width: '250px', padding: '1rem', border: '1px solid #7df9ff', borderRadius: '12px',
+                backgroundColor: selectedTechPolicy === item ? '#7df9ff' : '#1a1a40', color: selectedTechPolicy === item ? '#000' : '#7df9ff',
+                textAlign: 'left', boxShadow: selectedTechPolicy === item ? '0 0 10px #7df9ff' : 'none', cursor: 'pointer'
+              }}>
+                <div style={{ fontSize: '1.5rem' }}>{item.icon}</div>
+                <strong>{item.title}</strong>
+                <div style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>{item.description}</div>
+              </button>
+            ))}
+          </div>
+          <div style={{ marginTop: '1rem' }}>
+            <button onClick={drawNewOptions} style={{ marginRight: '1rem', padding: '0.5rem 1rem', backgroundColor: '#444', color: '#fff' }}>Reshuffle</button>
+            <button disabled={!selectedTechPolicy} onClick={startTimer} style={{ padding: '0.5rem 1rem', backgroundColor: '#00ffe7', color: '#000', border: 'none' }}>Start Game</button>
+          </div>
+          <div style={{ marginTop: '1rem' }}>
+            <button onClick={() => setScreen(2)} style={{ padding: '0.5rem 1rem', color: '#ccc', background: 'transparent', border: '1px solid #444' }}>Back</button>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
