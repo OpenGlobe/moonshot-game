@@ -164,6 +164,37 @@ export default function MoonshotGame() {
         </div>
       )}
 
+          {screen === 4 && (
+        <div>
+          <h2>🚀 Your Moonshot Challenge</h2>
+          {problem && renderCard(problem)}
+          {selectedTechPolicy && renderCard(selectedTechPolicy)}
+
+          {timeLeft > 0 && (
+            <div style={{ fontSize: '1.5rem', marginTop: '1rem', color: '#00ffe7' }}>
+              ⏱ Time Left: {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
+            </div>
+          )}
+
+          <div style={{ marginTop: '2rem' }}>
+            {!powerUp ? (
+              <button onClick={drawPowerUp} style={{ padding: '0.5rem 1rem', backgroundColor: '#2c3e50', color: '#ecf0f1', border: '1px solid #7df9ff' }}>Need a Power-Up?</button>
+            ) : (
+              <div style={{ marginTop: '1rem', textAlign: 'left', maxWidth: '400px', marginLeft: 'auto', marginRight: 'auto', border: '1px solid #ffcc70', borderRadius: '12px', padding: '1rem', backgroundColor: '#1a1a40' }}>
+                <h3 style={{ color: '#ffcc70' }}>Power-Up:</h3>
+                <p><strong>{powerUp.title}</strong></p>
+                <p>{powerUp.description}</p>
+                <button onClick={drawPowerUp} style={{ marginTop: '1rem', padding: '0.3rem 0.8rem', backgroundColor: '#444', color: '#fff', border: '1px solid #ffcc70' }}>Try Another</button>
+              </div>
+            )}
+          </div>
+
+          <div style={{ marginTop: '2rem' }}>
+            <button onClick={() => setScreen(3)} style={{ padding: '0.5rem 1rem', color: '#ccc', background: 'transparent', border: '1px solid #444' }}>Back</button>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
