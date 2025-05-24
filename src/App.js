@@ -29,7 +29,7 @@ export default function MoonshotGame() {
   const [screen, setScreen] = useState(1);
   const [problem, setProblem] = useState(null);
   const [techPolicyOptions, setTechPolicyOptions] = useState([]);
-  const [selectedTechPolicy, setSelectedTechPolicy] = useState(null);
+  const [selectedTechPolicies, setSelectedTechPolicies] = useState([]);
   const [powerUp, setPowerUp] = useState(null);
   const [timeLeft, setTimeLeft] = useState(0);
   const [timeLimit, setTimeLimit] = useState(null);
