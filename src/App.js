@@ -283,7 +283,6 @@ export default function MoonshotGame() {
         ⏱ Time Left: {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
       </div>
     )}
-
     <div style={{ marginTop: '2rem' }}>
       {!powerUp ? (
         <button onClick={drawPowerUp} style={{
@@ -321,15 +320,25 @@ export default function MoonshotGame() {
         </div>
       )}
     </div>
-  </div>
-)}
 
-          <div style={{ marginTop: '2rem' }}>
-            <button onClick={() => setScreen(3)} style={{ padding: '0.5rem 1rem', color: '#ccc', background: 'transparent', border: '1px solid #444' }}>Back</button>
-          </div>
-        </div>
-      )}
-
-    </div>
-  );
+    {/* Back Button after power-up section */}
+    <div style={{ marginTop: '2rem' }}>
+      <button
+        onClick={() => setScreen(3)}
+        style={{
+          padding: '0.5rem 1rem',
+          color: '#ccc',
+          background: 'transparent',
+          border: '1px solid #444'
+        }}
+      >
+        Back
+      </button>
+    </div> {/* closes screen 4 */}
+  )} {/* closes screen === 4 conditional */}
+</div> {/* closes the main return container */}
+);
 }
+
+export default MoonshotGame;
+
