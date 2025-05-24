@@ -258,14 +258,13 @@ export default function MoonshotGame() {
           <button onClick={resetGame} style={buttonStyle}>Reset Game</button>
         </div>
       )}
-        // sticky bar
         <div style={{
   position: 'fixed',
   bottom: 0,
   width: '100%',
   background: theme.cardBackground,
   color: theme.color,
-  fontSize: '0.7rem',
+  fontSize: '0.65rem',
   textAlign: 'center',
   padding: '0.5rem 1rem',
   borderTop: `1px solid ${theme.borderColor}`,
@@ -275,14 +274,17 @@ export default function MoonshotGame() {
   gap: '1rem',
   zIndex: 100
 }}>
-  <span>Made with love in space</span>
+  <span>
+    Designed for AAAE 2025 • Code and definitions built with AI • Inspired by retro space games.<br />
+    Art & icons credited to public domain & 8-bit creators on itch.io & Google Fonts
+  </span>
   <img
-    src="https://i.imgur.com/e5e6Tno.gif" // example 8-bit rocket sprite
+    src="https://i.imgur.com/e5e6Tno.gif"
     alt="sprite"
+    className="pixel-art"
     style={{ height: '20px', animation: 'float 2s ease-in-out infinite' }}
   />
 </div>
-// end of sticky bar
     </div>
   );
 }
