@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { ThemeContext } from './ThemeContext';
 
 export default function MoonshotGame() {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
   const problems = [
     { title: "POLICY", description: "Adversarial government policies endanger arts programming, diversity", icon: "🧾" },
     { title: "SPACES", description: "Arts graduates struggle to get people into physical spaces", icon: "🏛️" },
@@ -9,21 +12,9 @@ export default function MoonshotGame() {
   ];
 
   const techPolicyEmojis = {
-    "Audio": "🎧",
-    "Content": "🧠",
-    "Feedback": "✋",
-    "Capture": "📸",
-    "Interfaces": "🎭",
-    "Reality": "🌐",
-    "Avatars": "👤",
-    "Geofencing": "📍",
-    "Crowdfunding": "💰",
-    "Patronage": "🙌",
-    "Scoring": "🏆",
-    "Tokenization": "🔗",
-    "Carbon": "🌿",
-    "Budgeting": "🗳️",
-    "Accreditation": "🎓"
+    "Audio": "🎧", "Content": "🧠", "Feedback": "✋", "Capture": "📸", "Interfaces": "🎭", "Reality": "🌐",
+    "Avatars": "👤", "Geofencing": "📍", "Crowdfunding": "💰", "Patronage": "🙌", "Scoring": "🏆",
+    "Tokenization": "🔗", "Carbon": "🌿", "Budgeting": "🗳️", "Accreditation": "🎓"
   };
 
   const [screen, setScreen] = useState(1);
@@ -79,6 +70,16 @@ export default function MoonshotGame() {
     setScreen(4);
   };
 
+  const resetGame = () => {
+    setScreen(1);
+    setProblem(null);
+    setTechPolicyOptions([]);
+    setSelectedTechPolicies([]);
+    setPowerUp(null);
+    setTimeLeft(0);
+    setTimeLimit(null);
+  };
+
   useEffect(() => {
     if (timeLeft > 0) {
       const timerId = setInterval(() => setTimeLeft(t => t - 1), 1000);
@@ -87,254 +88,174 @@ export default function MoonshotGame() {
   }, [timeLeft]);
 
   const renderCard = (item) => (
-    <div style={{ marginBottom: '1rem', border: '1px solid #7df9ff', borderRadius: '12px', padding: '1rem', backgroundColor: '#1a1a40', width: '100%', maxWidth: '300px', margin: '0 auto' }}>
+    <div style={{
+      marginBottom: '1rem',
+      border: `1px solid ${theme.borderColor}`,
+      borderRadius: '12px',
+      padding: '1rem',
+      backgroundColor: theme.cardBackground,
+      width: '100%',
+      maxWidth: '300px',
+      margin: '0 auto'
+    }}>
       <div style={{ fontSize: '2rem' }}>{item.icon || '📘'}</div>
       <strong>{item.title}</strong>
       <p style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>{item.description}</p>
     </div>
   );
 
-  return (
-    <div style={{ padding: '2rem', fontFamily: 'Arial, sans-serif', background: 'url("https://www.transparenttextures.com/patterns/stardust.png") #0b0c2a', color: '#e0e0ff', minHeight: '100vh', textAlign: 'center' }}>
-      <h1 style={{ color: '#00ffe7', textShadow: '0 0 10px #00ffe7' }}>🚀 AAAE 2025 Moonshots! </h1>
+  const buttonStyle = {
+    backgroundColor: theme.buttonBackground,
+    color: theme.buttonColor,
+    padding: '0.5rem 1rem',
+    border: '2px solid currentColor',
+    margin: '0.5rem',
+    cursor: 'pointer',
+    fontFamily: 'inherit'
+  };
 
-{screen === 1 && (
-  <div>
-    <h2 style={{ marginBottom: '1rem' }}>
-      Let's get started! First, select a huge problem
-    </h2>
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-        gap: '1rem',
-        justifyItems: 'center'
-      }}
-    >
-      {problems.map((p, idx) => {
-        const isSelected = problem?.title === p.title;
-        return (
-          <button
-            key={idx}
-            onClick={() => setProblem(p)}
-            style={{
-              width: '100%',
-              maxWidth: '250px',
-              padding: '1rem',
-              border: '1px solid #7df9ff',
-              borderRadius: '12px',
-              backgroundColor: isSelected ? '#7df9ff' : '#1a1a40',
-              color: isSelected ? '#000' : '#7df9ff',
-              textAlign: 'center',
-              boxShadow: isSelected ? '0 0 10px #7df9ff' : 'none',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease-in-out',
-              transform: isSelected ? 'scale(1.05)' : 'scale(1)'
-            }}
-          >
-            <div style={{ fontSize: '2rem' }}>{p.icon}</div>
-            <strong>{p.title}</strong>
-            <div style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>
-              {p.description}
-            </div>
-          </button>
-        );
-      })}
-    </div>
-    <div style={{ marginTop: '2rem' }}>
-      <button
-        disabled={!problem}
-        onClick={() => setScreen(2)}
-        style={{
-          marginRight: '1rem',
-          padding: '0.5rem 1rem',
-          backgroundColor: '#00ffe7',
-          color: '#000',
-          border: 'none'
-        }}
-      >
-        Next
+  return (
+    <div style={{
+      padding: '2rem',
+      fontFamily: theme.fontFamily || 'Arial, sans-serif',
+      background: theme.background,
+      color: theme.color,
+      minHeight: '100vh',
+      textAlign: 'center'
+    }}>
+      <h1 style={{ color: theme.accent || '#00ffe7' }}>🚀 AAAE 2025 Moonshots!</h1>
+
+      <button onClick={toggleTheme} style={buttonStyle}>
+        Toggle Theme
       </button>
-    </div>
-  </div>
-)}
-      
-          {screen === 2 && (
+
+      {screen === 1 && (
         <div>
-          <h2 style={{ marginBottom: '1rem' }}>Choose a time limit</h2>
+          <h2>Let's get started! First, select a huge problem</h2>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+            gap: '1rem',
+            justifyItems: 'center'
+          }}>
+            {problems.map((p, idx) => {
+              const isSelected = problem?.title === p.title;
+              return (
+                <button key={idx} onClick={() => setProblem(p)} style={{
+                  ...buttonStyle,
+                  width: '100%',
+                  maxWidth: '250px',
+                  backgroundColor: isSelected ? theme.accent : theme.cardBackground,
+                  color: isSelected ? '#000' : theme.color,
+                  transform: isSelected ? 'scale(1.05)' : 'scale(1)',
+                  border: `1px solid ${theme.borderColor}`,
+                  borderRadius: '12px',
+                  textAlign: 'center'
+                }}>
+                  <div style={{ fontSize: '2rem' }}>{p.icon}</div>
+                  <strong>{p.title}</strong>
+                  <div style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>{p.description}</div>
+                </button>
+              );
+            })}
+          </div>
+          <div style={{ marginTop: '2rem' }}>
+            <button disabled={!problem} onClick={() => setScreen(2)} style={buttonStyle}>
+              Next
+            </button>
+          </div>
+        </div>
+      )}
+
+      {screen === 2 && (
+        <div>
+          <h2>Choose a time limit</h2>
           {problem && renderCard(problem)}
           {[10, 20, 30].map(min => (
-            <button key={min} onClick={() => { setTimeLimit(min); setScreen(3); }} style={{ margin: '1rem', padding: '1rem', backgroundColor: '#1a1a40', color: '#7df9ff', border: '1px solid #555' }}>{min} minutes</button>
+            <button key={min} onClick={() => { setTimeLimit(min); setScreen(3); }} style={buttonStyle}>
+              {min} minutes
+            </button>
           ))}
-          <div style={{ marginTop: '1rem' }}>
-            <button onClick={() => setScreen(1)} style={{ padding: '0.5rem 1rem', color: '#ccc', background: 'transparent', border: '1px solid #444' }}>Back</button>
+          <div>
+            <button onClick={() => setScreen(1)} style={buttonStyle}>Back</button>
           </div>
         </div>
       )}
 
-{screen === 3 && (
-  <div>
-    <h2 style={{ marginBottom: '1rem' }}>Select one or more Technology/Policy cards</h2>
-    {problem && renderCard(problem)}
-    <div style={{ marginBottom: '1rem' }}>
-      {timeLimit && (
-        <div style={{
-          border: '1px dashed #7df9ff',
-          padding: '1rem',
-          borderRadius: '12px',
-          backgroundColor: '#1a1a40',
-          maxWidth: '300px',
-          margin: '1rem auto'
-        }}>
-          ⏱️ You selected <strong>{timeLimit} minutes</strong>
+      {screen === 3 && (
+        <div>
+          <h2>Select one or more Technology/Policy cards</h2>
+          {problem && renderCard(problem)}
+          <div>
+            {techPolicyOptions.length === 0 && drawNewOptions()}
+            {techPolicyOptions.map((item, idx) => {
+              const isSelected = selectedTechPolicies.some(p => p.title === item.title);
+              return (
+                <button key={idx} onClick={() => {
+                  if (isSelected) {
+                    setSelectedTechPolicies(selectedTechPolicies.filter(p => p.title !== item.title));
+                  } else {
+                    setSelectedTechPolicies([...selectedTechPolicies, item]);
+                  }
+                }} style={{
+                  ...buttonStyle,
+                  width: '250px',
+                  textAlign: 'left',
+                  backgroundColor: isSelected ? theme.accent : theme.cardBackground,
+                  color: isSelected ? '#000' : theme.color,
+                  borderRadius: '12px'
+                }}>
+                  <div style={{ fontSize: '1.5rem' }}>{item.icon}</div>
+                  <strong>{item.title}</strong>
+                  <div style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>{item.description}</div>
+                </button>
+              );
+            })}
+          </div>
+          <div>
+            <button onClick={drawNewOptions} style={buttonStyle}>Reshuffle</button>
+            <button disabled={selectedTechPolicies.length === 0} onClick={startTimer} style={buttonStyle}>Start Game</button>
+          </div>
+          <div>
+            <button onClick={() => setScreen(2)} style={buttonStyle}>Back</button>
+          </div>
         </div>
       )}
-    </div>
-    <div style={{
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '1rem',
-      justifyContent: 'center'
-    }}>
-      {techPolicyOptions.length === 0 && drawNewOptions()}
-      {techPolicyOptions.map((item, idx) => {
-        const isSelected = selectedTechPolicies.some(p => p.title === item.title);
-        return (
-          <button
-            key={idx}
-            onClick={() => {
-              if (isSelected) {
-                setSelectedTechPolicies(selectedTechPolicies.filter(p => p.title !== item.title));
-              } else {
-                setSelectedTechPolicies([...selectedTechPolicies, item]);
-              }
-            }}
-            style={{
-              width: '250px',
-              padding: '1rem',
-              border: '1px solid #7df9ff',
-              borderRadius: '12px',
-              backgroundColor: isSelected ? '#7df9ff' : '#1a1a40',
-              color: isSelected ? '#000' : '#7df9ff',
-              textAlign: 'left',
-              boxShadow: isSelected ? '0 0 10px #7df9ff' : 'none',
-              cursor: 'pointer'
-            }}
-          >
-            <div style={{ fontSize: '1.5rem' }}>{item.icon}</div>
-            <strong>{item.title}</strong>
-            <div style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>
-              {item.description}
+
+      {screen === 4 && (
+        <div>
+          <h2>🚀 Your Moonshot Challenge</h2>
+          {problem && renderCard(problem)}
+          {selectedTechPolicies.map((card, idx) => (
+            <div key={idx}>{renderCard(card)}</div>
+          ))}
+          {timeLeft > 0 && (
+            <div style={{ fontSize: '1.5rem', marginTop: '1rem', color: theme.accent }}>
+              ⏱ Time Left: {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
             </div>
-          </button>
-        );
-      })}
-    </div>
-    <div style={{ marginTop: '1rem' }}>
-      <button onClick={drawNewOptions} style={{
-        marginRight: '1rem',
-        padding: '0.5rem 1rem',
-        backgroundColor: '#444',
-        color: '#fff'
-      }}>
-        Reshuffle
-      </button>
-      <button
-        disabled={selectedTechPolicies.length === 0}
-        onClick={startTimer}
-        style={{
-          padding: '0.5rem 1rem',
-          backgroundColor: '#00ffe7',
-          color: '#000',
-          border: 'none'
-        }}
-      >
-        Start Game
-      </button>
-    </div>
-    <div style={{ marginTop: '1rem' }}>
-      <button onClick={() => setScreen(2)} style={{
-        padding: '0.5rem 1rem',
-        color: '#ccc',
-        background: 'transparent',
-        border: '1px solid #444'
-      }}>
-        Back
-      </button>
-    </div>
-  </div>
-)}
-
-{screen === 4 && (
-  <div>
-    <h2>🚀 Your Moonshot Challenge</h2>
-    {problem && renderCard(problem)}
-
-    {selectedTechPolicies.map((card, idx) => (
-      <div key={idx}>{renderCard(card)}</div>
-    ))}
-
-    {timeLeft > 0 && (
-      <div style={{
-        fontSize: '1.5rem',
-        marginTop: '1rem',
-        color: '#00ffe7'
-      }}>
-        ⏱ Time Left: {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
-      </div>
-    )}
-    <div style={{ marginTop: '2rem' }}>
-      {!powerUp ? (
-        <button onClick={drawPowerUp} style={{
-          padding: '0.5rem 1rem',
-          backgroundColor: '#2c3e50',
-          color: '#ecf0f1',
-          border: '1px solid #7df9ff'
-        }}>
-          Need a Power-Up?
-        </button>
-      ) : (
-        <div style={{
-          marginTop: '1rem',
-          textAlign: 'left',
-          maxWidth: '400px',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          border: '1px solid #ffcc70',
-          borderRadius: '12px',
-          padding: '1rem',
-          backgroundColor: '#1a1a40'
-        }}>
-          <h3 style={{ color: '#ffcc70' }}>Power-Up:</h3>
-          <p><strong>{powerUp.title}</strong></p>
-          <p>{powerUp.description}</p>
-          <button onClick={drawPowerUp} style={{
-            marginTop: '1rem',
-            padding: '0.3rem 0.8rem',
-            backgroundColor: '#444',
-            color: '#fff',
-            border: '1px solid #ffcc70'
-          }}>
-            Try Another
-          </button>
-        </div>
-      )}
-    </div>
-
-    {/* Back Button after power-up section */}
-    <div style={{ marginTop: '2rem' }}>
-      <button
-        onClick={() => setScreen(3)}
-        style={{
-          padding: '0.5rem 1rem',
-          color: '#ccc',
-          background: 'transparent',
-          border: '1px solid #444'
-        }}
-      >
-        Back
-      </button>
+          )}
+          <div style={{ marginTop: '2rem' }}>
+            {!powerUp ? (
+              <button onClick={drawPowerUp} style={buttonStyle}>Need a Power-Up?</button>
+            ) : (
+              <div style={{
+                marginTop: '1rem',
+                textAlign: 'left',
+                maxWidth: '400px',
+                margin: '1rem auto',
+                border: `1px solid ${theme.borderColor}`,
+                borderRadius: '12px',
+                padding: '1rem',
+                backgroundColor: theme.cardBackground
+              }}>
+                <h3 style={{ color: theme.accent }}>Power-Up:</h3>
+                <p><strong>{powerUp.title}</strong></p>
+                <p>{powerUp.description}</p>
+                <button onClick={drawPowerUp} style={buttonStyle}>Try Another</button>
+              </div>
+            )}
           </div>
+          <button onClick={resetGame} style={buttonStyle}>Reset Game</button>
         </div>
       )}
     </div>
