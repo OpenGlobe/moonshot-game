@@ -1,1 +1,19 @@
-body { margin: 0; font-family: Arial, sans-serif; background-color: #0b0c2a; }
+/* Base styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #0b0c2a;
+}
+
+/* Floating animation for pixel art sprites */
+@keyframes float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+/* Optional: pixel art crisp rendering */
+.pixel-art {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
