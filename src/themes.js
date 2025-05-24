@@ -7,8 +7,8 @@ export const starblueTheme = {
   cardBackground: '#1a1a40',
   borderColor: '#7df9ff',
   accent: '#00ffe7',
-  fontFamily: '"VT323", monospace',
-  headingFont: '"Orbitron", sans-serif',
+  fontFamily: '"VT323", sans-serif',
+  headingFont: '"VT323", sans-serif',
   glowColor: '#00ffe7',
 };
 
@@ -21,7 +21,7 @@ export const synthwaveTheme = {
   cardBackground: '#2d004d',
   borderColor: '#ff00cc',
   accent: '#ff77ff',
-  fontFamily: '"VT323", monospace',
+  fontFamily: '"Orbitron", sans-serif',
   headingFont: '"Orbitron", sans-serif',
   glowColor: '#ff00cc',
 };
