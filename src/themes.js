@@ -7,8 +7,8 @@ export const starblueTheme = {
   cardBackground: '#1a1a40',
   borderColor: '#7df9ff',
   accent: '#00ffe7',
-  fontFamily: '"VT323", sans-serif',
-  headingFont: '"VT323", sans-serif',
+  fontFamily: '"Share Tech Mono", monospace',
+  headingFont: '"Share Tech Mono", monospace',
   glowColor: '#00ffe7',
 };
 
