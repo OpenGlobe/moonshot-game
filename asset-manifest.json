@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/moonshot-game/static/css/main.c962c1d6.css",
-    "main.js": "/moonshot-game/static/js/main.3468b52f.js",
+    "main.js": "/moonshot-game/static/js/main.fef84471.js",
     "index.html": "/moonshot-game/index.html",
     "main.c962c1d6.css.map": "/moonshot-game/static/css/main.c962c1d6.css.map",
-    "main.3468b52f.js.map": "/moonshot-game/static/js/main.3468b52f.js.map"
+    "main.fef84471.js.map": "/moonshot-game/static/js/main.fef84471.js.map"
   },
   "entrypoints": [
     "static/css/main.c962c1d6.css",
-    "static/js/main.3468b52f.js"
+    "static/js/main.fef84471.js"
   ]
 }
