@@ -181,7 +181,8 @@ export default function MoonshotGame() {
           </div>
         </div>
       )}
-{screen === 3 && (
+
+        {screen === 3 && (
   <div>
     <h2>Select one or more Technology/Policy cards</h2>
     {problem && renderCard(problem)}
@@ -225,55 +226,57 @@ export default function MoonshotGame() {
         );
       })}
     </div>
+
+    <div>
+      <button onClick={drawNewOptions} style={buttonStyle}>Reshuffle</button>
+      <button disabled={selectedTechPolicies.length === 0} onClick={startTimer} style={buttonStyle}>Start Game</button>
+    </div>
+    <div>
+      <button onClick={() => setScreen(2)} style={buttonStyle}>Back</button>
+    </div>
   </div>
 )}
 
-          <div>
-            <button onClick={drawNewOptions} style={buttonStyle}>Reshuffle</button>
-            <button disabled={selectedTechPolicies.length === 0} onClick={startTimer} style={buttonStyle}>Start Game</button>
-          </div>
-          <div>
-            <button onClick={() => setScreen(2)} style={buttonStyle}>Back</button>
-          </div>
-        </div>
-      )}
-
-      {screen === 4 && (
-        <div>
-          <h2>🚀 Your Moonshot Challenge</h2>
-          {problem && renderCard(problem)}
-          {selectedTechPolicies.map((card, idx) => (
-            <div key={idx}>{renderCard(card)}</div>
-          ))}
-          {timeLeft > 0 && (
-            <div style={{ fontSize: '1.5rem', marginTop: '1rem', color: theme.accent }}>
-              ⏱ Time Left: {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
-            </div>
-          )}
-          <div style={{ marginTop: '2rem' }}>
-            {!powerUp ? (
-              <button onClick={drawPowerUp} style={buttonStyle}>Need a Power-Up?</button>
-            ) : (
-              <div style={{
-                marginTop: '1rem',
-                textAlign: 'left',
-                maxWidth: '400px',
-                margin: '1rem auto',
-                border: `1px solid ${theme.borderColor}`,
-                borderRadius: '12px',
-                padding: '1rem',
-                backgroundColor: theme.cardBackground
-              }}>
-                <h3 style={{ color: theme.accent }}>Power-Up:</h3>
-                <p><strong>{powerUp.title}</strong></p>
-                <p>{powerUp.description}</p>
-                <button onClick={drawPowerUp} style={buttonStyle}>Try Another</button>
-              </div>
-            )}
-          </div>
-          <button onClick={resetGame} style={buttonStyle}>Reset Game</button>
+{screen === 4 && (
+  <div>
+    <h2>🚀 Your Moonshot Challenge</h2>
+    {problem && renderCard(problem)}
+    {selectedTechPolicies.map((card, idx) => (
+      <div key={idx}>{renderCard(card)}</div>
+    ))}
+    {timeLeft > 0 && (
+      <div style={{ fontSize: '1.5rem', marginTop: '1rem', color: theme.accent }}>
+        ⏱ Time Left: {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
+      </div>
+    )}
+    <div style={{ marginTop: '2rem' }}>
+      {!powerUp ? (
+        <button onClick={drawPowerUp} style={buttonStyle}>Need a Power-Up?</button>
+      ) : (
+        <div style={{
+          marginTop: '1rem',
+          textAlign: 'left',
+          maxWidth: '400px',
+          margin: '1rem auto',
+          border: `1px solid ${theme.borderColor}`,
+          borderRadius: '12px',
+          padding: '1rem',
+          backgroundColor: theme.cardBackground
+        }}>
+          <h3 style={{ color: theme.accent }}>Power-Up:</h3>
+          <p><strong>{powerUp.title}</strong></p>
+          <p>{powerUp.description}</p>
+          <button onClick={drawPowerUp} style={buttonStyle}>Try Another</button>
         </div>
       )}
     </div>
-  );
+    <button onClick={resetGame} style={buttonStyle}>Reset Game</button>
+  </div>
+)}
+
+</div>
+);
 }
+
+export default MoonshotGame;
+
