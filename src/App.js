@@ -98,27 +98,67 @@ export default function MoonshotGame() {
     <div style={{ padding: '2rem', fontFamily: 'Arial, sans-serif', background: 'url("https://www.transparenttextures.com/patterns/stardust.png") #0b0c2a', color: '#e0e0ff', minHeight: '100vh', textAlign: 'center' }}>
       <h1 style={{ color: '#00ffe7', textShadow: '0 0 10px #00ffe7' }}>🚀 AAAE 2025 Moonshots! </h1>
 
-      {screen === 1 && (
-        <div>
-          <h2 style={{ marginBottom: '1rem' }}>Let's get started!  First, select a huge problem</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '1rem', justifyItems: 'center' }}>
-            {problems.map((p, idx) => (
-              <button key={idx} onClick={() => setProblem(p)} style={{
-                width: '100%', maxWidth: '250px', padding: '1rem', border: '1px solid #7df9ff', borderRadius: '12px',
-                backgroundColor: problem === p ? '#7df9ff' : '#1a1a40', color: problem === p ? '#000' : '#7df9ff',
-                textAlign: 'center', boxShadow: problem === p ? '0 0 10px #7df9ff' : 'none', cursor: 'pointer', transition: 'all 0.2s ease-in-out', transform: problem === p ? 'scale(1.05)' : 'scale(1)'
-              }}>
-                <div style={{ fontSize: '2rem' }}>{p.icon}</div>
-                <strong>{p.title}</strong>
-                <div style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>{p.description}</div>
-              </button>
-            ))}
-          </div>
-          <div style={{ marginTop: '2rem' }}>
-            <button disabled={!problem} onClick={() => setScreen(2)} style={{ marginRight: '1rem', padding: '0.5rem 1rem', backgroundColor: '#00ffe7', color: '#000', border: 'none' }}>Next</button>
-          </div>
-        </div>
-      )}
+{screen === 1 && (
+  <div>
+    <h2 style={{ marginBottom: '1rem' }}>
+      Let's get started! First, select a huge problem
+    </h2>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+        gap: '1rem',
+        justifyItems: 'center'
+      }}
+    >
+      {problems.map((p, idx) => {
+        const isSelected = problem?.title === p.title;
+        return (
+          <button
+            key={idx}
+            onClick={() => setProblem(p)}
+            style={{
+              width: '100%',
+              maxWidth: '250px',
+              padding: '1rem',
+              border: '1px solid #7df9ff',
+              borderRadius: '12px',
+              backgroundColor: isSelected ? '#7df9ff' : '#1a1a40',
+              color: isSelected ? '#000' : '#7df9ff',
+              textAlign: 'center',
+              boxShadow: isSelected ? '0 0 10px #7df9ff' : 'none',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease-in-out',
+              transform: isSelected ? 'scale(1.05)' : 'scale(1)'
+            }}
+          >
+            <div style={{ fontSize: '2rem' }}>{p.icon}</div>
+            <strong>{p.title}</strong>
+            <div style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>
+              {p.description}
+            </div>
+          </button>
+        );
+      })}
+    </div>
+    <div style={{ marginTop: '2rem' }}>
+      <button
+        disabled={!problem}
+        onClick={() => setScreen(2)}
+        style={{
+          marginRight: '1rem',
+          padding: '0.5rem 1rem',
+          backgroundColor: '#00ffe7',
+          color: '#000',
+          border: 'none'
+        }}
+      >
+        Next
+      </button>
+    </div>
+  </div>
+)}
+
       
           {screen === 2 && (
         <div>
