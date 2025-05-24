@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/moonshot-game/static/js/main.cb7a44d1.js",
+    "main.js": "/moonshot-game/static/js/main.39625bb2.js",
     "index.html": "/moonshot-game/index.html",
-    "main.cb7a44d1.js.map": "/moonshot-game/static/js/main.cb7a44d1.js.map"
+    "main.39625bb2.js.map": "/moonshot-game/static/js/main.39625bb2.js.map"
   },
   "entrypoints": [
-    "static/js/main.cb7a44d1.js"
+    "static/js/main.39625bb2.js"
   ]
 }
