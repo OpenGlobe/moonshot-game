@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { ThemeContext } from './ThemeContext';
 
 export default function MoonshotGame() {
   const problems = [
@@ -28,6 +29,7 @@ export default function MoonshotGame() {
 
   const [screen, setScreen] = useState(1);
   const [problem, setProblem] = useState(null);
+  const [theme, toggleTheme] = useContext(ThemeContext);
   const [techPolicyOptions, setTechPolicyOptions] = useState([]);
   const [selectedTechPolicies, setSelectedTechPolicies] = useState([]);
   const [powerUp, setPowerUp] = useState(null);
@@ -97,6 +99,17 @@ export default function MoonshotGame() {
   return (
     <div style={{ padding: '2rem', fontFamily: 'Arial, sans-serif', background: 'url("https://www.transparenttextures.com/patterns/stardust.png") #0b0c2a', color: '#e0e0ff', minHeight: '100vh', textAlign: 'center' }}>
       <h1 style={{ color: '#00ffe7', textShadow: '0 0 10px #00ffe7' }}>🚀 AAAE 2025 Moonshots! </h1>
+<button onClick={toggleTheme} style={{
+  margin: '1rem auto',
+  padding: '0.5rem 1rem',
+  fontFamily: 'inherit',
+  backgroundColor: theme.buttonBackground,
+  color: theme.buttonColor,
+  border: '2px solid currentColor',
+  cursor: 'pointer'
+}}>
+  Toggle Theme
+</button>
 
 {screen === 1 && (
   <div>
