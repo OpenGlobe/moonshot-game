@@ -155,7 +155,10 @@ export default function MoonshotGame() {
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
             gap: '1rem',
-            justifyItems: 'center'
+            justifyItems: 'center',
+            justifyContent: 'center',
+            maxWidth: '1000px',
+            margin: '0 auto'
           }}>
             {problems.map((p, idx) => {
               const isSelected = problem?.title === p.title;
