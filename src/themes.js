@@ -7,7 +7,8 @@ export const starblueTheme = {
   cardBackground: '#1a1a40',
   borderColor: '#7df9ff',
   accent: '#00ffe7',
-  fontFamily: '"Press Start 2P", monospace',
+  fontFamily: '"VT323", monospace',
+  headingFont: '"Orbitron", sans-serif',
   glowColor: '#00ffe7',
 };
 
@@ -20,10 +21,10 @@ export const synthwaveTheme = {
   cardBackground: '#2d004d',
   borderColor: '#ff00cc',
   accent: '#ff77ff',
-  fontFamily: '"Press Start 2P", monospace',
+  fontFamily: '"VT323", monospace',
+  headingFont: '"Orbitron", sans-serif',
   glowColor: '#ff00cc',
 };
 
-// For ThemeContext toggle logic
 export const defaultTheme = starblueTheme;
 export const retroTheme = synthwaveTheme;
