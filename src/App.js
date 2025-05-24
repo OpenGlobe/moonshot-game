@@ -258,6 +258,31 @@ export default function MoonshotGame() {
           <button onClick={resetGame} style={buttonStyle}>Reset Game</button>
         </div>
       )}
+        // sticky bar
+        <div style={{
+  position: 'fixed',
+  bottom: 0,
+  width: '100%',
+  background: theme.cardBackground,
+  color: theme.color,
+  fontSize: '0.7rem',
+  textAlign: 'center',
+  padding: '0.5rem 1rem',
+  borderTop: `1px solid ${theme.borderColor}`,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  gap: '1rem',
+  zIndex: 100
+}}>
+  <span>Made with love in space</span>
+  <img
+    src="https://i.imgur.com/e5e6Tno.gif" // example 8-bit rocket sprite
+    alt="sprite"
+    style={{ height: '20px', animation: 'float 2s ease-in-out infinite' }}
+  />
+</div>
+// end of sticky bar
     </div>
   );
 }
