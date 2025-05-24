@@ -336,7 +336,8 @@ export default function MoonshotGame() {
       </button>
     </div> {/* closes screen 4 */}
   )} {/* closes screen === 4 conditional */}
-</div> {/* closes the main return container */}
+{/* closes the main return container */}
+</div> 
 );
 }
 
