@@ -198,6 +198,7 @@ export default function MoonshotGame() {
         }}>
           ⏱️ You selected <strong>{timeLimit} minutes</strong>
         </div>
+            </div>    
           <div>
             {techPolicyOptions.length === 0 && drawNewOptions()}
             {techPolicyOptions.map((item, idx) => {
