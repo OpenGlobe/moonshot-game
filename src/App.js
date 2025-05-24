@@ -181,50 +181,53 @@ export default function MoonshotGame() {
           </div>
         </div>
       )}
+{screen === 3 && (
+  <div>
+    <h2>Select one or more Technology/Policy cards</h2>
+    {problem && renderCard(problem)}
 
-      {screen === 3 && (
-        <div>
-          <h2>Select one or more Technology/Policy cards</h2>
-          {problem && renderCard(problem)}
-           <div style={{ marginBottom: '1rem' }}>
-      {timeLimit && (
-        <div style={{
-          border: '1px dashed #7df9ff',
-          padding: '1rem',
-          borderRadius: '12px',
-          backgroundColor: '#1a1a40',
-          maxWidth: '300px',
-          margin: '1rem auto'
-        }}>
-          ⏱️ You selected <strong>{timeLimit} minutes</strong>
-        </div>
-            </div>    
-          <div>
-            {techPolicyOptions.length === 0 && drawNewOptions()}
-            {techPolicyOptions.map((item, idx) => {
-              const isSelected = selectedTechPolicies.some(p => p.title === item.title);
-              return (
-                <button key={idx} onClick={() => {
-                  if (isSelected) {
-                    setSelectedTechPolicies(selectedTechPolicies.filter(p => p.title !== item.title));
-                  } else {
-                    setSelectedTechPolicies([...selectedTechPolicies, item]);
-                  }
-                }} style={{
-                  ...buttonStyle,
-                  width: '250px',
-                  textAlign: 'left',
-                  backgroundColor: isSelected ? theme.accent : theme.cardBackground,
-                  color: isSelected ? '#000' : theme.color,
-                  borderRadius: '12px'
-                }}>
-                  <div style={{ fontSize: '1.5rem' }}>{item.icon}</div>
-                  <strong>{item.title}</strong>
-                  <div style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>{item.description}</div>
-                </button>
-              );
-            })}
-          </div>
+    {timeLimit && (
+      <div style={{
+        border: '1px dashed #7df9ff',
+        padding: '1rem',
+        borderRadius: '12px',
+        backgroundColor: '#1a1a40',
+        maxWidth: '300px',
+        margin: '1rem auto'
+      }}>
+        ⏱️ You selected <strong>{timeLimit} minutes</strong>
+      </div>
+    )}
+
+    <div>
+      {techPolicyOptions.length === 0 && drawNewOptions()}
+      {techPolicyOptions.map((item, idx) => {
+        const isSelected = selectedTechPolicies.some(p => p.title === item.title);
+        return (
+          <button key={idx} onClick={() => {
+            if (isSelected) {
+              setSelectedTechPolicies(selectedTechPolicies.filter(p => p.title !== item.title));
+            } else {
+              setSelectedTechPolicies([...selectedTechPolicies, item]);
+            }
+          }} style={{
+            ...buttonStyle,
+            width: '250px',
+            textAlign: 'left',
+            backgroundColor: isSelected ? theme.accent : theme.cardBackground,
+            color: isSelected ? '#000' : theme.color,
+            borderRadius: '12px'
+          }}>
+            <div style={{ fontSize: '1.5rem' }}>{item.icon}</div>
+            <strong>{item.title}</strong>
+            <div style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>{item.description}</div>
+          </button>
+        );
+      })}
+    </div>
+  </div>
+)}
+
           <div>
             <button onClick={drawNewOptions} style={buttonStyle}>Reshuffle</button>
             <button disabled={selectedTechPolicies.length === 0} onClick={startTimer} style={buttonStyle}>Start Game</button>
