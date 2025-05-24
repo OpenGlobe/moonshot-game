@@ -278,5 +278,3 @@ export default function MoonshotGame() {
 );
 }
 
-export default MoonshotGame;
-
