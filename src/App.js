@@ -186,6 +186,18 @@ export default function MoonshotGame() {
         <div>
           <h2>Select one or more Technology/Policy cards</h2>
           {problem && renderCard(problem)}
+           <div style={{ marginBottom: '1rem' }}>
+      {timeLimit && (
+        <div style={{
+          border: '1px dashed #7df9ff',
+          padding: '1rem',
+          borderRadius: '12px',
+          backgroundColor: '#1a1a40',
+          maxWidth: '300px',
+          margin: '1rem auto'
+        }}>
+          ⏱️ You selected <strong>{timeLimit} minutes</strong>
+        </div>
           <div>
             {techPolicyOptions.length === 0 && drawNewOptions()}
             {techPolicyOptions.map((item, idx) => {
