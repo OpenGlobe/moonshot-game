@@ -172,61 +172,157 @@ export default function MoonshotGame() {
         </div>
       )}
 
-          {screen === 3 && (
-        <div>
-          <h2 style={{ marginBottom: '1rem' }}>Select a Technology/Policy card</h2>
-          {problem && renderCard(problem)}
-          <div style={{ marginBottom: '1rem' }}>
-            {timeLimit && <div style={{ border: '1px dashed #7df9ff', padding: '1rem', borderRadius: '12px', backgroundColor: '#1a1a40', maxWidth: '300px', margin: '1rem auto' }}>⏱️ You selected <strong>{timeLimit} minutes</strong></div>}
-          </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center' }}>
-            {techPolicyOptions.length === 0 && drawNewOptions()}
-            {techPolicyOptions.map((item, idx) => (
-              <button key={idx} onClick={() => setSelectedTechPolicy(item)} style={{
-                width: '250px', padding: '1rem', border: '1px solid #7df9ff', borderRadius: '12px',
-                backgroundColor: selectedTechPolicy === item ? '#7df9ff' : '#1a1a40', color: selectedTechPolicy === item ? '#000' : '#7df9ff',
-                textAlign: 'left', boxShadow: selectedTechPolicy === item ? '0 0 10px #7df9ff' : 'none', cursor: 'pointer'
-              }}>
-                <div style={{ fontSize: '1.5rem' }}>{item.icon}</div>
-                <strong>{item.title}</strong>
-                <div style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>{item.description}</div>
-              </button>
-            ))}
-          </div>
-          <div style={{ marginTop: '1rem' }}>
-            <button onClick={drawNewOptions} style={{ marginRight: '1rem', padding: '0.5rem 1rem', backgroundColor: '#444', color: '#fff' }}>Reshuffle</button>
-            <button disabled={!selectedTechPolicy} onClick={startTimer} style={{ padding: '0.5rem 1rem', backgroundColor: '#00ffe7', color: '#000', border: 'none' }}>Start Game</button>
-          </div>
-          <div style={{ marginTop: '1rem' }}>
-            <button onClick={() => setScreen(2)} style={{ padding: '0.5rem 1rem', color: '#ccc', background: 'transparent', border: '1px solid #444' }}>Back</button>
-          </div>
+{screen === 3 && (
+  <div>
+    <h2 style={{ marginBottom: '1rem' }}>Select one or more Technology/Policy cards</h2>
+    {problem && renderCard(problem)}
+    <div style={{ marginBottom: '1rem' }}>
+      {timeLimit && (
+        <div style={{
+          border: '1px dashed #7df9ff',
+          padding: '1rem',
+          borderRadius: '12px',
+          backgroundColor: '#1a1a40',
+          maxWidth: '300px',
+          margin: '1rem auto'
+        }}>
+          ⏱️ You selected <strong>{timeLimit} minutes</strong>
         </div>
       )}
-
-          {screen === 4 && (
-        <div>
-          <h2>🚀 Your Moonshot Challenge</h2>
-          {problem && renderCard(problem)}
-          {selectedTechPolicy && renderCard(selectedTechPolicy)}
-
-          {timeLeft > 0 && (
-            <div style={{ fontSize: '1.5rem', marginTop: '1rem', color: '#00ffe7' }}>
-              ⏱ Time Left: {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
+    </div>
+    <div style={{
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '1rem',
+      justifyContent: 'center'
+    }}>
+      {techPolicyOptions.length === 0 && drawNewOptions()}
+      {techPolicyOptions.map((item, idx) => {
+        const isSelected = selectedTechPolicies.some(p => p.title === item.title);
+        return (
+          <button
+            key={idx}
+            onClick={() => {
+              if (isSelected) {
+                setSelectedTechPolicies(selectedTechPolicies.filter(p => p.title !== item.title));
+              } else {
+                setSelectedTechPolicies([...selectedTechPolicies, item]);
+              }
+            }}
+            style={{
+              width: '250px',
+              padding: '1rem',
+              border: '1px solid #7df9ff',
+              borderRadius: '12px',
+              backgroundColor: isSelected ? '#7df9ff' : '#1a1a40',
+              color: isSelected ? '#000' : '#7df9ff',
+              textAlign: 'left',
+              boxShadow: isSelected ? '0 0 10px #7df9ff' : 'none',
+              cursor: 'pointer'
+            }}
+          >
+            <div style={{ fontSize: '1.5rem' }}>{item.icon}</div>
+            <strong>{item.title}</strong>
+            <div style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>
+              {item.description}
             </div>
-          )}
+          </button>
+        );
+      })}
+    </div>
+    <div style={{ marginTop: '1rem' }}>
+      <button onClick={drawNewOptions} style={{
+        marginRight: '1rem',
+        padding: '0.5rem 1rem',
+        backgroundColor: '#444',
+        color: '#fff'
+      }}>
+        Reshuffle
+      </button>
+      <button
+        disabled={selectedTechPolicies.length === 0}
+        onClick={startTimer}
+        style={{
+          padding: '0.5rem 1rem',
+          backgroundColor: '#00ffe7',
+          color: '#000',
+          border: 'none'
+        }}
+      >
+        Start Game
+      </button>
+    </div>
+    <div style={{ marginTop: '1rem' }}>
+      <button onClick={() => setScreen(2)} style={{
+        padding: '0.5rem 1rem',
+        color: '#ccc',
+        background: 'transparent',
+        border: '1px solid #444'
+      }}>
+        Back
+      </button>
+    </div>
+  </div>
+)}
 
-          <div style={{ marginTop: '2rem' }}>
-            {!powerUp ? (
-              <button onClick={drawPowerUp} style={{ padding: '0.5rem 1rem', backgroundColor: '#2c3e50', color: '#ecf0f1', border: '1px solid #7df9ff' }}>Need a Power-Up?</button>
-            ) : (
-              <div style={{ marginTop: '1rem', textAlign: 'left', maxWidth: '400px', marginLeft: 'auto', marginRight: 'auto', border: '1px solid #ffcc70', borderRadius: '12px', padding: '1rem', backgroundColor: '#1a1a40' }}>
-                <h3 style={{ color: '#ffcc70' }}>Power-Up:</h3>
-                <p><strong>{powerUp.title}</strong></p>
-                <p>{powerUp.description}</p>
-                <button onClick={drawPowerUp} style={{ marginTop: '1rem', padding: '0.3rem 0.8rem', backgroundColor: '#444', color: '#fff', border: '1px solid #ffcc70' }}>Try Another</button>
-              </div>
-            )}
-          </div>
+{screen === 4 && (
+  <div>
+    <h2>🚀 Your Moonshot Challenge</h2>
+    {problem && renderCard(problem)}
+
+    {selectedTechPolicies.map((card, idx) => (
+      <div key={idx}>{renderCard(card)}</div>
+    ))}
+
+    {timeLeft > 0 && (
+      <div style={{
+        fontSize: '1.5rem',
+        marginTop: '1rem',
+        color: '#00ffe7'
+      }}>
+        ⏱ Time Left: {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
+      </div>
+    )}
+
+    <div style={{ marginTop: '2rem' }}>
+      {!powerUp ? (
+        <button onClick={drawPowerUp} style={{
+          padding: '0.5rem 1rem',
+          backgroundColor: '#2c3e50',
+          color: '#ecf0f1',
+          border: '1px solid #7df9ff'
+        }}>
+          Need a Power-Up?
+        </button>
+      ) : (
+        <div style={{
+          marginTop: '1rem',
+          textAlign: 'left',
+          maxWidth: '400px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          border: '1px solid #ffcc70',
+          borderRadius: '12px',
+          padding: '1rem',
+          backgroundColor: '#1a1a40'
+        }}>
+          <h3 style={{ color: '#ffcc70' }}>Power-Up:</h3>
+          <p><strong>{powerUp.title}</strong></p>
+          <p>{powerUp.description}</p>
+          <button onClick={drawPowerUp} style={{
+            marginTop: '1rem',
+            padding: '0.3rem 0.8rem',
+            backgroundColor: '#444',
+            color: '#fff',
+            border: '1px solid #ffcc70'
+          }}>
+            Try Another
+          </button>
+        </div>
+      )}
+    </div>
+  </div>
+)}
 
           <div style={{ marginTop: '2rem' }}>
             <button onClick={() => setScreen(3)} style={{ padding: '0.5rem 1rem', color: '#ccc', background: 'transparent', border: '1px solid #444' }}>Back</button>
