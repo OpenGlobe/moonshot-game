@@ -34,9 +34,8 @@ export default function MoonshotGame() {
       { title: "Emotion Sensing Interfaces", description: "Wearables or cameras that read facial expressions, heart rate or other signals." },
       { title: "Cross-Reality", description: "Platforms that connect users across physical and virtual worlds" },
       { title: "Avatars", description: "Digital identities with viewing histories, social badges, tokens." },
-      { title: "Geofencing", description: "Experiences based on physical location." }
+      { title: "Geofencing", description: "Experiences based on physical location." },
       { title: "HMDs", description: "Head mounted devices like Apple Vision Pro, Meta Quest." }
-      { title: "HMDs", description: "Devices like Apple Vision Pro, Meta Quest." }
     
     ];
     const policies = [
@@ -46,13 +45,13 @@ export default function MoonshotGame() {
       { title: "Tokenization", description: "Digital ownership models for assets, spaces, or engagement." },
       { title: "Carbon Credits", description: "Funding for work that contributes to ecological causes." },
       { title: "Participatory Budgeting", description: "Citizens vote on how to allocate public funding." },
-      { title: "Digital Venue Accreditation", description: "Recognizing online or hybrid spaces as official venues." }
-      { title: "Acceptable Use", description: "Certification for ethical use, attribution and IP." }
-      { title: "AI Screening", description: "Vetting based on novelty and quality." }
-      { title: "Royalties Engine", description: "Automated / fractional payment systems." }
-      { title: "Co-op Ownership", description: "Co-ownership of physical spaces." }
-      { title: "IP Revenue Sharing", description: "Owners and patrons share equity." }
-      { title: "Subscriptions", description: "Hospitality memberships ties to brands or financial services." }
+      { title: "Digital Venue Accreditation", description: "Recognizing online or hybrid spaces as official venues." },
+      { title: "Acceptable Use", description: "Certification for ethical use, attribution and IP." },
+      { title: "AI Screening", description: "Vetting based on novelty and quality." },
+      { title: "Royalties Engine", description: "Automated / fractional payment systems." },
+      { title: "Co-op Ownership", description: "Co-ownership of physical spaces." },
+      { title: "IP Revenue Sharing", description: "Owners and patrons share equity." },
+      { title: "Subscriptions", description: "Hospitality memberships ties to brands or financial services." },
       { title: "GenAI Royalties", description: "Compensation for work used to train models." }
     ];
     const combined = [...technologies, ...policies].map(item => {
@@ -79,7 +78,7 @@ export default function MoonshotGame() {
       { title: "Preservation", description: "Restoring and protecting spaces for future generations." },
       { title: "University Art Districts", description: "Creative + knowledge economies." },
       { title: "Interplay", description: "Unlocking the wisdom of the body." },
-      { title: "Going Solo", description: "Novel experiences as a one-person program." },
+      { title: "Going Solo", description: "Novel experiences as a one-person program." }
     ];
     setPowerUp(powerUps[Math.floor(Math.random() * powerUps.length)]);
   };
