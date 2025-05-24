@@ -27,23 +27,33 @@ export default function MoonshotGame() {
 
   const drawNewOptions = () => {
     const technologies = [
-      { title: "Spatial Audio", description: "Directional, 3D sound to enhance immersive experiences." },
+      { title: "Spatial Audio", description: "Directional, 3D sound." },
       { title: "Neuro-driven Content", description: "Uses EEG headbands to adapt content based on brain activity." },
-      { title: "Haptic Feedback", description: "Wearables that simulate touch to deepen virtual interactions." },
-      { title: "Volumetric Capture", description: "3D recordings of people/places to recreate scenes in VR/AR." },
-      { title: "Emotion Sensing Interfaces", description: "Interfaces that respond to emotional inputs from users." },
-      { title: "Cross-Reality", description: "Blends virtual and real-world environments for seamless interaction." },
-      { title: "Avatars", description: "Digital identities with custom expressions, data, and social traits." },
-      { title: "Geofencing", description: "Location-aware experiences that change based on user presence." }
+      { title: "Haptic Feedback", description: "Gloves, suits or surfaces that simulate touch." },
+      { title: "Volumetric Capture", description: "3D renderings of people or places." },
+      { title: "Emotion Sensing Interfaces", description: "Wearables or cameras that read facial expressions, heart rate or other signals." },
+      { title: "Cross-Reality", description: "Platforms that connect users across physical and virtual worlds" },
+      { title: "Avatars", description: "Digital identities with viewing histories, social badges, tokens." },
+      { title: "Geofencing", description: "Experiences based on physical location." }
+      { title: "HMDs", description: "Head mounted devices like Apple Vision Pro, Meta Quest." }
+      { title: "HMDs", description: "Devices like Apple Vision Pro, Meta Quest." }
+    
     ];
     const policies = [
-      { title: "Crowdfunding", description: "Platforms where communities collectively fund creative projects." },
-      { title: "Micro-Patronage", description: "Small recurring donations that sustain individual creators." },
-      { title: "Human-AI Scoring", description: "Assessment systems that reward effective human-AI collaboration." },
+      { title: "Crowdfunding", description: "Collective funding pots managed by communities." },
+      { title: "Micro-Patronage", description: "Pay small amounts for individual access, small donations." },
+      { title: "Human-AI Scoring", description: "Credentialing rewards based on skillful AI augmentation over automation." },
       { title: "Tokenization", description: "Digital ownership models for assets, spaces, or engagement." },
-      { title: "Carbon Credits", description: "Funding models that support ecologically positive art projects." },
-      { title: "Participatory Budgeting", description: "Citizens help decide how public funds are allocated to the arts." },
-      { title: "Digital Venue Accreditation", description: "Recognition for hybrid or fully online cultural spaces." }
+      { title: "Carbon Credits", description: "Funding for work that contributes to ecological causes." },
+      { title: "Participatory Budgeting", description: "Citizens vote on how to allocate public funding." },
+      { title: "Digital Venue Accreditation", description: "Recognizing online or hybrid spaces as official venues." }
+      { title: "Acceptable Use", description: "Certification for ethical use, attribution and IP." }
+      { title: "AI Screening", description: "Vetting based on novelty and quality." }
+      { title: "Royalties Engine", description: "Automated / fractional payment systems." }
+      { title: "Co-op Ownership", description: "Co-ownership of physical spaces." }
+      { title: "IP Revenue Sharing", description: "Owners and patrons share equity." }
+      { title: "Subscriptions", description: "Hospitality memberships ties to brands or financial services." }
+      { title: "GenAI Royalties", description: "Compensation for work used to train models." }
     ];
     const combined = [...technologies, ...policies].map(item => {
       const key = Object.keys(techPolicyEmojis).find(k => item.title.includes(k));
@@ -54,13 +64,22 @@ export default function MoonshotGame() {
 
   const drawPowerUp = () => {
     const powerUps = [
-      { title: "Museum as a Hub", description: "Reimagine museums as lively community gathering and ideation spaces." },
-      { title: "Smart Cities + Public Art", description: "Use art to connect tech innovation, sustainability, and citizens." },
-      { title: "Healing through Art", description: "Tap into art’s power to help communities process trauma and grow." },
-      { title: "Creative Rebellion", description: "Use radical art practices to challenge status quos and reimagine norms." },
-      { title: "Rural Renaissance", description: "Empower rural communities as vital cultural innovation centers." },
-      { title: "Arts Curriculum Initiatives", description: "Integrate arts across education to build expressive, creative citizens." },
-      { title: "Novel Partnerships", description: "Team up with unlikely allies — like hospitals, farms, or transit hubs." }
+      { title: "Museum as a Hub", description: "Rethinking public engagement spaces." },
+      { title: "Smart Cities + Public Art", description: "Art as a bridge between tech, sustainability + communities." },
+      { title: "Healing", description: "Trauma-informed arts, memorials as spaces." },
+      { title: "Creative Rebellion", description: "Arts to address contemporary challenges." },
+      { title: "Rural Renaissance", description: "Rural arts organizations as community hubs." },
+      { title: "Arts Curriculum Initiatives", description: "Empowering curriculum through arts." },
+      { title: "Novel Partnerships", description: "Transactional or cooperatives with non-arts organizations." },
+      { title: "Scale", description: "Apply a local, regional, country or global perspective." },
+      { title: "Research Lab", description: "Arts + placemaking + community." },
+      { title: "Dartmoore State of Mind", description: "Connection + creativity through arts." },
+      { title: "Data Science", description: "Decision making through data." },
+      { title: "ABCE", description: "Arts-based community engagement." },
+      { title: "Preservation", description: "Restoring and protecting spaces for future generations." },
+      { title: "University Art Districts", description: "Creative + knowledge economies." },
+      { title: "Interplay", description: "Unlocking the wisdom of the body." },
+      { title: "Going Solo", description: "Novel experiences as a one-person program." },
     ];
     setPowerUp(powerUps[Math.floor(Math.random() * powerUps.length)]);
   };
@@ -131,7 +150,7 @@ export default function MoonshotGame() {
 
       {screen === 1 && (
         <div>
-          <h2>Let's get started! First, select a huge problem</h2>
+          <h2>Let's get started! First, select a huge problem.</h2>
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
@@ -263,14 +282,14 @@ export default function MoonshotGame() {
           padding: '1rem',
           backgroundColor: theme.cardBackground
         }}>
-          <h3 style={{ color: theme.accent }}>Power-Up:</h3>
+          <h3 style={{ color: theme.accent }}>AAAE Power-Up:</h3>
           <p><strong>{powerUp.title}</strong></p>
           <p>{powerUp.description}</p>
           <button onClick={drawPowerUp} style={buttonStyle}>Try Another</button>
         </div>
       )}
     </div>
-    <button onClick={resetGame} style={buttonStyle}>Reset Game</button>
+    <button onClick={resetGame} style={buttonStyle}>Start Over</button>
   </div>
 )}
 
